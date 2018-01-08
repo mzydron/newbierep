@@ -6,31 +6,13 @@ class Player:
         self.player_mark = player_mark
 
 
-"""""""""""
-class WinCondition:
-    # This class is set of rules defining win condition and ending a game
-    def __init__(self,position1,position2,position3):
-        self.position1 = position1
-        self.position2 = position2
-        self.position3 = position3
-
-    def Win(self):
-        # Checks if 3 positions are occupied by the same symbol
-        if self.position1 == self.position2 == self.position3:
-            return True
-        else:
-            return False
-
-"""""""""
-
-
 class Win:
     # Check if win condition is met on given board
 
     def __init__(self, board):
         self.board = board
 
-    def is_win(self):
+    def is_win(self):  # Main condition checking for winning configuration on the board / also returns true for Tie
         return self.is_win_horizontal() or self.is_win_vertical() or self.is_win_diagonal()
 
     def is_win_horizontal(self):
@@ -55,6 +37,12 @@ class Win:
         if (self.board[0] == self.board[4] == self.board[8]) and self.board[0] != " ":
             return True
         elif (self.board[2] == self.board[4] == self.board[6]) and self.board[2] != " ":
+            return True
+        else:
+            return False
+
+    def is_tie(self, round):
+        if round == 9:
             return True
         else:
             return False
