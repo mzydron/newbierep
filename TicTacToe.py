@@ -31,17 +31,24 @@ def main():
     area_status = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     win_condition = Win(area_status)
 
-    while True:
+    while win_condition.is_win() is False and round_count < 9 :
         os.system("cls")
         build_area(area_status)
         current_player = player_list[round_count % 2]
         mark_spot(current_player, area_status)
-        if win_condition.is_win():
-            build_area(area_status)
-            print(current_player.player_name, " WON!")
-            break
         round_count += 1
         time.sleep(1)
 
+    if round_count == 9:
+        build_area(area_status)
+        print("Tie!")
+    else:
+        build_area(area_status)
+        print(current_player.player_name, " WON!")
+
 
 main()
+
+
+# BugFixes:
+# Wrong input on turn changing player / solved : while loop
