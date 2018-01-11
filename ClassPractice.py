@@ -68,8 +68,8 @@ class Game:
         else:
             return False
 
-    def is_tie(self, round):
-        if round == 9:
+    def is_tie(self,):
+        if self.is_win() is False:
             return True
         else:
             return False
@@ -89,19 +89,26 @@ class Player:
 
 class Chaotic_AI(Player):
     # Class with AI wich chosses random spot and place's mark as long as it isnt occupied
-    def __init__(self):
-        pass
+    def __init__(self,game):
+        self.ai_player = Player("AI","O")
+        self.game = game
 
 
 
-    def is_space_free(self):
+    def is_space_free(self,game,space):
         # Checks if given space is free
-        if self == " ":
+        if game.board_status[space - 1] == " ":
             return True
         else:
             return False
+
     def mark_spot_comp(self):
-        pass
+        ran_spot = self.random_spot()
+        if self.is_space_free(self.game, ran_spot):
+            self.game.board_status[int(ran_spot) - 1] = self.ai_player.player_mark
+        else:
+            self.mark_spot_comp()
+
 
     def random_spot(self):
         self.ran = random.randint(1,10)
