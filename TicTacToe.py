@@ -30,6 +30,7 @@ def one_player():
     while round_count < 9:
         os.system("cls")
         game.build_area()
+
         if round_count % 2 == 0:
             game.mark_spot(player)
             round_count += 1
@@ -70,3 +71,8 @@ def main():
 
 
 main()
+
+'''''''''''
+Problemy: Można postawić swój krzyżyk na czyimś kółku
+          Przez to powyżej gra liczy tylko 9 rund i zawsze kończy się remisem. 
+'''''''''''

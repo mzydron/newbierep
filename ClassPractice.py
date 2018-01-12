@@ -2,10 +2,10 @@ import random
 
 
 class Game:
+
     # Class made to import settings / To occupy less lines of code
     def __init__(self):
         self.board_status = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-        #self.win = Win(self.board_status)
         self.player1 = Player("Player1", "X")
         self.player2 = Player("Player2", "O")
         self.player_list = [self.player1, self.player2]
@@ -22,12 +22,21 @@ class Game:
     def mark_spot(self,player):
         while True:
             mark = input("Mark the spot 1-9.")
-
             if mark.isdigit() is True and 0 < int(mark) < 10:
-                self.board_status[int(mark)-1] = player.player_mark
-                break
+                if self.is_spot_free(mark):
+                    self.board_status[int(mark)-1] = player.player_mark
+                    break
+                else:
+                    print("This spot is taken")
+                    continue
             else:
                 print("Wrong input")
+
+    def is_spot_free(self,spot):
+        if self.board_status[int(spot) -1] != " ":
+            return False
+        else:
+            return True
 
     def play_again(self):
         inp = input("'y' to play again, anything to leave")
@@ -35,8 +44,6 @@ class Game:
             return True
         else:
             print("Thank you, have a nice day")
-
-
 
 
     def is_win(self):  # Main condition checking for winning configuration on the board / also returns true for Tie
@@ -76,9 +83,6 @@ class Game:
 
 
 
-
-
-
 class Player:
     # This class defines Player with 2 parameters - PlayerX - where x stands for number of player
     # and player_mark witch can be X or O
@@ -87,7 +91,7 @@ class Player:
         self.player_mark = player_mark
 
 
-class Chaotic_AI(Player):
+class Chaotic_AI():
     # Class with AI wich chosses random spot and place's mark as long as it isnt occupied
     def __init__(self,game):
         self.ai_player = Player("AI","O")
